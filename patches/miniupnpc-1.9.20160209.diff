@@ -1,0 +1,239 @@
+diff -Naur miniupnpc-1.9.20160209-orig/miniupnpcstrings.h miniupnpc-1.9.20160209/miniupnpcstrings.h
+--- miniupnpc-1.9.20160209-orig/miniupnpcstrings.h	1969-12-31 18:00:00.000000000 -0600
++++ miniupnpc-1.9.20160209/miniupnpcstrings.h	2016-03-20 02:44:27.659149209 -0500
+@@ -0,0 +1,22 @@
++/* $Id: miniupnpcstrings.h.in,v 1.6 2014/11/04 22:31:55 nanard Exp $ */
++/* Project: miniupnp
++ * http://miniupnp.free.fr/ or http://miniupnp.tuxfamily.org/
++ * Author: Thomas Bernard
++ * Copyright (c) 2005-2014 Thomas Bernard
++ * This software is subjects to the conditions detailed
++ * in the LICENCE file provided within this distribution */
++#ifndef MINIUPNPCSTRINGS_H_INCLUDED
++#define MINIUPNPCSTRINGS_H_INCLUDED
++
++#define OS_STRING "MSWindows/6.1.7601"
++#define MINIUPNPC_VERSION_STRING "1.9"
++
++#if 0
++/* according to "UPnP Device Architecture 1.0" */
++#define UPNP_VERSION_STRING "UPnP/1.0"
++#else
++/* according to "UPnP Device Architecture 1.1" */
++#define UPNP_VERSION_STRING "UPnP/1.1"
++#endif
++
++#endif
+diff -Naur miniupnpc-1.9.20160209-orig/msvc/miniupnpc.sln miniupnpc-1.9.20160209/msvc/miniupnpc.sln
+--- miniupnpc-1.9.20160209-orig/msvc/miniupnpc.sln	2009-12-10 13:09:10.000000000 -0600
++++ miniupnpc-1.9.20160209/msvc/miniupnpc.sln	2016-03-20 02:48:58.630671816 -0500
+@@ -1,27 +1,25 @@
+-﻿
+-Microsoft Visual Studio Solution File, Format Version 10.00
+-# Visual C++ Express 2008
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miniupnpc", "miniupnpc.vcproj", "{D28CE435-CB33-4BAE-8A52-C6EF915956F5}"
+-EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "upnpc-static", "upnpc-static.vcproj", "{469E1CF6-08A2-4B7B-A2AA-5BDB089857C1}"
+-	ProjectSection(ProjectDependencies) = postProject
+-		{D28CE435-CB33-4BAE-8A52-C6EF915956F5} = {D28CE435-CB33-4BAE-8A52-C6EF915956F5}
+-	EndProjectSection
++Microsoft Visual Studio Solution File, Format Version 12.00
++# Visual Studio 14
++VisualStudioVersion = 14.0.22129.1
++MinimumVisualStudioVersion = 10.0.40219.1
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miniupnpc", "miniupnpc.vcxproj", "{D28CE435-CB33-4BAE-8A52-C6EF915956F5}"
+ EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+ 		Debug|Win32 = Debug|Win32
++		Debug|x64 = Debug|x64
+ 		Release|Win32 = Release|Win32
++		Release|x64 = Release|x64
+ 	EndGlobalSection
+ 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+ 		{D28CE435-CB33-4BAE-8A52-C6EF915956F5}.Debug|Win32.ActiveCfg = Debug|Win32
+ 		{D28CE435-CB33-4BAE-8A52-C6EF915956F5}.Debug|Win32.Build.0 = Debug|Win32
++		{D28CE435-CB33-4BAE-8A52-C6EF915956F5}.Debug|x64.ActiveCfg = Debug|x64
++		{D28CE435-CB33-4BAE-8A52-C6EF915956F5}.Debug|x64.Build.0 = Debug|x64
+ 		{D28CE435-CB33-4BAE-8A52-C6EF915956F5}.Release|Win32.ActiveCfg = Release|Win32
+ 		{D28CE435-CB33-4BAE-8A52-C6EF915956F5}.Release|Win32.Build.0 = Release|Win32
+-		{469E1CF6-08A2-4B7B-A2AA-5BDB089857C1}.Debug|Win32.ActiveCfg = Debug|Win32
+-		{469E1CF6-08A2-4B7B-A2AA-5BDB089857C1}.Debug|Win32.Build.0 = Debug|Win32
+-		{469E1CF6-08A2-4B7B-A2AA-5BDB089857C1}.Release|Win32.ActiveCfg = Release|Win32
+-		{469E1CF6-08A2-4B7B-A2AA-5BDB089857C1}.Release|Win32.Build.0 = Release|Win32
++		{D28CE435-CB33-4BAE-8A52-C6EF915956F5}.Release|x64.ActiveCfg = Release|x64
++		{D28CE435-CB33-4BAE-8A52-C6EF915956F5}.Release|x64.Build.0 = Release|x64
+ 	EndGlobalSection
+ 	GlobalSection(SolutionProperties) = preSolution
+ 		HideSolutionNode = FALSE
+diff -Naur miniupnpc-1.9.20160209-orig/msvc/miniupnpc.vcxproj miniupnpc-1.9.20160209/msvc/miniupnpc.vcxproj
+--- miniupnpc-1.9.20160209-orig/msvc/miniupnpc.vcxproj	1969-12-31 18:00:00.000000000 -0600
++++ miniupnpc-1.9.20160209/msvc/miniupnpc.vcxproj	2016-03-20 02:53:17.735462070 -0500
+@@ -0,0 +1,167 @@
++<?xml version="1.0" encoding="utf-8"?>
++<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup Label="ProjectConfigurations">
++    <ProjectConfiguration Include="Debug|Win32">
++      <Configuration>Debug</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Debug|x64">
++      <Configuration>Debug</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|Win32">
++      <Configuration>Release</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|x64">
++      <Configuration>Release</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++  </ItemGroup>
++  <PropertyGroup Label="Globals">
++    <ProjectGuid>{D28CE435-CB33-4BAE-8A52-C6EF915956F5}</ProjectGuid>
++    <RootNamespace>miniupnpc</RootNamespace>
++    <Keyword>Win32Proj</Keyword>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
++    <ConfigurationType>StaticLibrary</ConfigurationType>
++    <PlatformToolset>v140</PlatformToolset>
++    <CharacterSet>Unicode</CharacterSet>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
++    <ConfigurationType>StaticLibrary</ConfigurationType>
++    <PlatformToolset>v140</PlatformToolset>
++    <CharacterSet>Unicode</CharacterSet>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
++    <ConfigurationType>StaticLibrary</ConfigurationType>
++    <PlatformToolset>v140</PlatformToolset>
++    <CharacterSet>Unicode</CharacterSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
++    <ConfigurationType>StaticLibrary</ConfigurationType>
++    <PlatformToolset>v140</PlatformToolset>
++    <CharacterSet>Unicode</CharacterSet>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
++  <ImportGroup Label="ExtensionSettings">
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <PropertyGroup Label="UserMacros" />
++  <PropertyGroup>
++    <_ProjectFileVersion>14.0.22129.1</_ProjectFileVersion>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <OutDir>Debug\</OutDir>
++    <IntDir>Debug\</IntDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <OutDir>Debug\</OutDir>
++    <IntDir>Debug\</IntDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <OutDir>Release\</OutDir>
++    <IntDir>Release\</IntDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <OutDir>Release\</OutDir>
++    <IntDir>Release\</IntDir>
++  </PropertyGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <ClCompile>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;MINIUPNP_STATICLIB;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <MinimalRebuild>true</MinimalRebuild>
++      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
++      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
++      <PrecompiledHeader />
++      <WarningLevel>Level3</WarningLevel>
++      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
++    </ClCompile>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <ClCompile>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;MINIUPNP_STATICLIB;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
++      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++    </ClCompile>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <ClCompile>
++      <Optimization>MaxSpeed</Optimization>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;MINIUPNP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <PrecompiledHeader />
++      <WarningLevel>Level3</WarningLevel>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++    </ClCompile>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <ClCompile>
++      <Optimization>MaxSpeed</Optimization>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;MINIUPNP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++    </ClCompile>
++  </ItemDefinitionGroup>
++  <ItemGroup>
++    <ClCompile Include="..\connecthostport.c" />
++    <ClCompile Include="..\igd_desc_parse.c" />
++    <ClCompile Include="..\minisoap.c" />
++    <ClCompile Include="..\miniupnpc.c" />
++    <ClCompile Include="..\miniwget.c" />
++    <ClCompile Include="..\minixml.c" />
++    <ClCompile Include="..\portlistingparse.c" />
++    <ClCompile Include="..\receivedata.c" />
++    <ClCompile Include="..\upnpcommands.c" />
++    <ClCompile Include="..\upnperrors.c" />
++    <ClCompile Include="..\upnpreplyparse.c" />
++    <ClCompile Include="..\minissdpc.c" />
++    <ClCompile Include="..\upnpdev.c" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\connecthostport.h" />
++    <ClInclude Include="..\declspec.h" />
++    <ClInclude Include="..\igd_desc_parse.h" />
++    <ClInclude Include="..\minisoap.h" />
++    <ClInclude Include="..\miniupnpc.h" />
++    <ClInclude Include="..\miniupnpcstrings.h" />
++    <ClInclude Include="..\miniupnpctypes.h" />
++    <ClInclude Include="..\miniwget.h" />
++    <ClInclude Include="..\minixml.h" />
++    <ClInclude Include="..\portlistingparse.h" />
++    <ClInclude Include="..\receivedata.h" />
++    <ClInclude Include="..\upnpcommands.h" />
++    <ClInclude Include="..\upnperrors.h" />
++    <ClInclude Include="..\upnpreplyparse.h" />
++  </ItemGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
++  <ImportGroup Label="ExtensionTargets">
++  </ImportGroup>
++</Project>
