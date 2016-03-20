@@ -22,11 +22,11 @@ install:
   - scripts\build_protobuf-2.6.1.bat
   #- scripts\build_bdb.bat
   #- scripts\build_miniupnpc.bat
-  #- scripts\build_qrencode.bat
+  - scripts\build_qrencode.bat
 
 build: off
 artifacts:
-  - path: mue-win-deps\bin
+  - path: C:\projects\mue-win-deps\packages\
 test: off
 deploy: off
 cache:
