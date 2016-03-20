@@ -18,7 +18,7 @@ if EXIST zlib (
 SETLOCAL ENABLEDELAYEDEXPANSION
 if NOT EXIST "zlib" (
   echo extracting ...
-  CALL bsdtar xfz zlib-%ZLIB_VERSION%.tar.gz
+  CALL tar xfz zlib-%ZLIB_VERSION%.tar.gz
   IF !ERRORLEVEL! NEQ 0 GOTO ERROR
   rename zlib-%ZLIB_VERSION% zlib
   IF !ERRORLEVEL! NEQ 0 GOTO ERROR

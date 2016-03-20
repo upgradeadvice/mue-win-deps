@@ -8,12 +8,13 @@ configuration:
   - Release
 
 platform:
-  - x86
+  #- x86
   - x64
 
 clone_folder: C:\projects\mue-win-deps
 
 install:
+  - set PATH=C:\Program Files\Git\usr\bin;%PATH%
   - set TARGET_ARCH=64
   - if /I "%platform%"=="x86" set TARGET_ARCH=32
   - .\settings.bat "TARGET_ARCH=%TARGET_ARCH%" "BUILD_TYPE=%configuration%" "TOOLS_VERSION=%vs_version%.0"
@@ -28,3 +29,5 @@ artifacts:
   - path: mue-win-deps\bin
 test: off
 deploy: off
+cache:
+  - packages

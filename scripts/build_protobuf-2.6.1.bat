@@ -18,7 +18,7 @@ if EXIST protobuf (
 SETLOCAL ENABLEDELAYEDEXPANSION
 if NOT EXIST protobuf (
   echo extracting
-  CALL bsdtar xfz protobuf-%PROTOBUF_VERSION%.tar.bz2
+  CALL tar xfz protobuf-%PROTOBUF_VERSION%.tar.bz2
   IF !ERRORLEVEL! NEQ 0 GOTO ERROR
   rename protobuf-%PROTOBUF_VERSION% protobuf
   IF !ERRORLEVEL! NEQ 0 GOTO ERROR
