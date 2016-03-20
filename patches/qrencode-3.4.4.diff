@@ -1,9 +1,9 @@
 diff --git a/config.h b/config.h
 new file mode 100644
-index 0000000..2b344a0
+index 0000000..32ff645
 --- /dev/null
 +++ b/config.h
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,25 @@
 +#define HAVE_MEMORY_H 1
 +#define HAVE_STDINT_H 1
 +#define HAVE_STDLIB_H 1
@@ -12,12 +12,23 @@ index 0000000..2b344a0
 +#define HAVE_STRING_H 1
 +#define HAVE_SYS_STAT_H 1
 +#define HAVE_SYS_TYPES_H 1
-+#define MAJOR_VERSION 3
-+#define MICRO_VERSION 4
-+#define MINOR_VERSION 4
 +#define PACKAGE "libqrencode"
-+#define VERSION "3.4.4"
 +#define inline _inline
++#define MAJOR_VERSION 3
++#define MINOR_VERSION 4
++#define MICRO_VERSION 4
++#define VERSION "3.4.4"
++
++#define __STATIC static
++
++#if defined(_WIN32) || defined(_WIN64)
++  #define strcasecmp _stricmp
++  #define strncasecmp _strnicmp
++  #if _MSC_VER < 1900
++    #define snprintf _snprintf
++    #define vsnprintf _vsnprintf
++  #endif
++#endif
 diff --git a/msvc/qrencode.sln b/msvc/qrencode.sln
 new file mode 100644
 index 0000000..11dfc60
