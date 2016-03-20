@@ -20,7 +20,7 @@ install:
   - .\settings.bat "TARGET_ARCH=%TARGET_ARCH%" "BUILD_TYPE=%configuration%" "TOOLS_VERSION=%vs_version%.0"
   - scripts\build_zlib.bat
   - scripts\build_protobuf-2.6.1.bat
-  #- scripts\build_bdb.bat
+  - scripts\build_bdb.bat
   - scripts\build_miniupnpc.bat
   - scripts\build_qrencode.bat
 
