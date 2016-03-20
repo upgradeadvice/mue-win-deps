@@ -26,7 +26,9 @@ install:
 
 build: off
 artifacts:
-  - path: mue-win-deps\packages
+  - path: packages
+    name: packages
+    type: zip
 test: off
 deploy: off
 cache:
