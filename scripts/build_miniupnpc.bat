@@ -7,7 +7,7 @@ echo ------ miniupnpc -----
 IF "%ROOTDIR%"=="" ( echo "ROOTDIR variable not set" && GOTO DONE )
 
 cd %PKGDIR%
-CALL curl -s -S -f -O -L -k --retry 3 http://miniupnp.free.fr/files/miniupnpc-%MINIUPNPC_VERSION%.tar.bz2
+CALL curl -s -S -f -O -L -k --retry 3 http://miniupnp.free.fr/files/miniupnpc-%MINIUPNPC_VERSION%.tar.gz
 IF %ERRORLEVEL% NEQ 0 GOTO ERROR
 
 if EXIST miniupnpc (
@@ -18,7 +18,7 @@ if EXIST miniupnpc (
 SETLOCAL ENABLEDELAYEDEXPANSION
 if NOT EXIST miniupnpc (
   echo extracting
-  CALL tar xfj miniupnpc-%MINIUPNPC_VERSION%.tar.bz2
+  CALL tar xfz miniupnpc-%MINIUPNPC_VERSION%.tar.gz
   IF !ERRORLEVEL! NEQ 0 GOTO ERROR
   rename miniupnpc-%MINIUPNPC_VERSION% miniupnpc
   IF !ERRORLEVEL! NEQ 0 GOTO ERROR
